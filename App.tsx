@@ -23,7 +23,6 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import { ThemeToggle } from './components/ThemeToggle';
-import { ThemeToggleExpoUI } from './components/ThemeToggleExpoUI';
 
 function AppContent() {
   const { colors, isDark, toggleTheme } = useTheme();
@@ -128,22 +127,6 @@ function AppContent() {
               <ThemeToggle size="default" onToggle={toggleTheme} />
               <ThemeToggle size="large" onToggle={toggleTheme} />
             </View>
-          </View>
-        </View>
-
-        {/* Expo UI Test */}
-        <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Expo UI Test (Experimental)
-          </Text>
-          <View style={[styles.exampleCard, { backgroundColor: colors.surface }]}>
-            <ThemeToggleExpoUI useExpoUI={true} onToggle={toggleTheme} />
-            <Text style={[styles.description, { color: colors.textSecondary }]}>
-              Testing @expo/ui compatibility
-            </Text>
-            <Text style={[styles.warningText, { color: colors.textSecondary }]}>
-              Note: @expo/ui is alpha and may not work in Expo Snack
-            </Text>
           </View>
         </View>
 

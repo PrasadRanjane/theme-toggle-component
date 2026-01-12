@@ -9,7 +9,12 @@ A reusable theme toggle button for switching between light and dark modes. Extra
 - ✅ **Icon Transitions** - Smooth icon switching (light-mode/dark-mode)
 - ✅ **Theme Integration** - Works with ThemeProvider
 - ✅ **Customizable** - Custom styles and callbacks
-- ✅ **Zero Dependencies** - Only React Native core + icons
+- ✅ **Expo Snack Compatible** - Uses standard React Native components (works perfectly in Snack)
+- ✅ **Minimal Dependencies** - Only @expo/vector-icons
+
+## Note on @expo/ui
+
+`@expo/ui` is currently in alpha and **does not work in Expo Snack**. This component uses standard React Native components (`TouchableOpacity` + `MaterialIcons`) which work reliably in Snack.
 
 ## Installation in Expo Snack
 
