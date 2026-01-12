@@ -11,9 +11,15 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 // Try to import @expo/ui components
 let ExpoUI: any = null;
+let ExpoUIButton: any = null;
+let ExpoUIText: any = null;
+
 try {
   // @expo/ui might not be available in Snack
   ExpoUI = require('@expo/ui');
+  // Try to get specific components
+  ExpoUIButton = ExpoUI?.Button;
+  ExpoUIText = ExpoUI?.Text;
 } catch (error) {
   console.log('@expo/ui not available, using fallback');
 }
@@ -61,32 +67,59 @@ export const ThemeToggleExpoUI: React.FC<ThemeToggleProps> = ({
   // Try to use Expo UI if available and requested
   if (useExpoUI && ExpoUI) {
     try {
-      // Attempt to use Expo UI Button or other components
-      // Note: This is experimental and may not work in Snack
-      return (
-        <View style={style}>
-          <Text style={{ color: 'red', fontSize: 12 }}>
-            Expo UI Test (may not work in Snack)
-          </Text>
-          <TouchableOpacity
-            style={[
-              styles.themeToggle,
-              {
-                padding: config.padding,
-                borderRadius: config.borderRadius,
-              },
-            ]}
-            onPress={onToggle}
-            activeOpacity={0.7}
-          >
-            <MaterialIcons
-              name={isDark ? 'light-mode' : 'dark-mode'}
-              size={config.size}
-              color="white"
-            />
-          </TouchableOpacity>
-        </View>
-      );
+      // Attempt to use Expo UI Button if available
+      // Note: @expo/ui is alpha and may not work in Snack
+      if (ExpoUIButton) {
+        return (
+          <View style={style}>
+            <Text style={{ color: '#10b981', fontSize: 12, marginBottom: 8 }}>
+              ✓ Using @expo/ui Button
+            </Text>
+            <ExpoUIButton
+              onPress={onToggle}
+              style={[
+                styles.themeToggle,
+                {
+                  padding: config.padding,
+                  borderRadius: config.borderRadius,
+                },
+              ]}
+            >
+              <MaterialIcons
+                name={isDark ? 'light-mode' : 'dark-mode'}
+                size={config.size}
+                color="white"
+              />
+            </ExpoUIButton>
+          </View>
+        );
+      } else {
+        // Expo UI available but Button component not found
+        return (
+          <View style={style}>
+            <Text style={{ color: '#f59e0b', fontSize: 12, marginBottom: 8 }}>
+              ⚠ @expo/ui loaded but Button not found
+            </Text>
+            <TouchableOpacity
+              style={[
+                styles.themeToggle,
+                {
+                  padding: config.padding,
+                  borderRadius: config.borderRadius,
+                },
+              ]}
+              onPress={onToggle}
+              activeOpacity={0.7}
+            >
+              <MaterialIcons
+                name={isDark ? 'light-mode' : 'dark-mode'}
+                size={config.size}
+                color="white"
+              />
+            </TouchableOpacity>
+          </View>
+        );
+      }
     } catch (error) {
       console.log('Expo UI failed, using fallback:', error);
     }
